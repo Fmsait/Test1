@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoramento Atmosférico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 60px); /* Ajusta altura para não sobrepor o footer */
+    }
+    .data-section {
+      width: 90%;
+      height: 7%;
+      margin: auto;
+      padding: 8px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .data-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      color: white;
+    }
+    .data-table td:nth-child(1) { background-color: #28a745; }
+    .data-table td:nth-child(2) { background-color: #dc3545; }
+    .data-table td:nth-child(3) { background-color: #ffc107; }
+    .data-table td:nth-child(4) { background-color: #17a2b8; }
+    .data-table td:nth-child(5) { background-color: #6f42c1; }
+    .data-table td:nth-child(6) { background-color: #20c997; }
+    .content-section {
+      display: flex;
+      width: 90%;
+      height: 85%;
+      margin: auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .info-section, .biomas-section {
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+    .info-section {
+      width: 50%;
+      height: 90%;
+      margin-right: 10px;
+    }
+    .biomas-section {
+      width: 50%;
+      height: 90%;
+      margin-left: 10px;
+    }
+    .biomas-section img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    footer {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Respirando o Brasil: Monitorando a qualidade do ar através dos Biomas - (Eletiva: Inovação, Tecnologia e Sustentabilidade)
+  </header>
+
+  <div class="container">
+    <div class="data-section">
+      <table class="data-table">
+        <tr>
+          <td>Umidade do Solo: <span id="soilMoistureValue">-</span></td>
+          <td>MQ-9 (Gás Monóxido de Carbono): <span id="mq9Value">-</span></td>
+          <td>LDR (Luminosidade): <span id="ldrValue">-</span></td>
+          <td>MQ-135 (Qualidade do Ar): <span id="mq135Value">-</span></td>
+          <td>Umidade (DHT11): <span id="humidityValue">-</span></td>
+          <td>Pressão: <span id="pressureValue">-</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="content-section">
+      <div class="info-section">
+        <h1>QUALIDADE DO AR</h1>
+        <div>
+          <h3>Umidade do Solo</h3>
+          <p><strong>Definição:</strong> A umidade do solo é a quantidade de água presente no solo. É um fator crucial para a saúde das plantas, influenciando sua capacidade de absorver nutrientes e crescer de forma saudável.</p>
+          <p><strong>Medição:</strong> Normalmente medida com sensores de umidade do solo, que podem funcionar com base em resistividade, capacitância ou tensão de umidade. Sensores resistivos medem a condutividade elétrica entre dois eletrodos enterrados no solo; sensores capacitivos medem a variação na constante dielétrica do solo à medida que a umidade muda.</p>
+          <p><strong>Aplicações:</strong> Monitoramento de irrigação, controle de condições ambientais em estufas e jardins, e gestão de recursos hídricos.</p>
+        </div>
+        <div>
+          <h3>MQ-9 (Gás Monóxido de Carbono)</h3>
+          <p><strong>Definição:</strong> O MQ-9 é um sensor que detecta o monóxido de carbono (CO), um gás tóxico e incolor que é um subproduto da queima incompleta de combustíveis. Altas concentrações podem ser prejudiciais à saúde.</p>
+          <p><strong>Medição:</strong> O sensor MQ-9 utiliza uma resistência variável que muda em resposta à concentração de CO no ar. A variação na resistência é então traduzida em uma leitura de concentração de CO.</p>
+          <p><strong>Aplicações:</strong> Detecção de poluição do ar, monitoramento de ambientes internos para segurança, e sistemas de alerta em veículos e indústrias.</p>
+        </div>
+        <div>
+          <h3>LDR (Luminosidade)</h3>
+          <p><strong>Definição:</strong> LDR (Light Dependent Resistor) é um tipo de resistor cuja resistência varia com a intensidade da luz que incide sobre ele. É usado para medir a luminosidade ou a intensidade da luz.</p>
+          <p><strong>Medição:</strong> A resistência do LDR diminui com o aumento da intensidade da luz. Medindo a resistência ou a corrente através do LDR, pode-se determinar a intensidade luminosa.</p>
+          <p><strong>Aplicações:</strong> Controle automático de iluminação, monitoramento de condições de iluminação em ambientes internos e externos, e em sistemas de detecção de luz.</p>
+        </div>
+        <div>
+          <h3>MQ-135 (Qualidade do Ar)</h3>
+          <p><strong>Definição:</strong> O MQ-135 é um sensor de qualidade do ar que detecta uma variedade de poluentes, incluindo amônia (NH3), óxidos de nitrogênio (NOx), benzeno (C6H6), e outras substâncias nocivas.</p>
+          <p><strong>Medição:</strong> Funciona com base na resistência de um elemento sensível ao gás, que varia com a concentração dos poluentes. A leitura da resistência é convertida em uma estimativa da concentração dos gases.</p>
+          <p><strong>Aplicações:</strong> Monitoramento da qualidade do ar em ambientes internos e externos, controle de poluição industrial, e sistemas de alerta para ambientes urbanos.</p>
+        </div>
+        <div>
+          <h3>Umidade (DHT11)</h3>
+          <p><strong>Definição:</strong> O DHT11 é um sensor que mede a umidade relativa do ar e a temperatura. A umidade relativa é a quantidade de vapor d'água presente no ar em relação ao máximo que o ar pode conter a uma dada temperatura.</p>
+          <p><strong>Medição:</strong> O DHT11 usa um sensor capacitivo para medir a umidade e um termistor para medir a temperatura. Os valores são digitalmente convertidos e enviados para o microcontrolador.</p>
+          <p><strong>Aplicações:</strong> Monitoramento de condições ambientais em aplicações domésticas e industriais, controle climático em estufas e ambientes fechados, e coleta de dados meteorológicos.</p>
+        </div>
+        <div>
+          <h3>Pressão</h3>
+          <p><strong>Definição:</strong> A pressão atmosférica é a força exercida pela coluna de ar sobre uma superfície devido ao peso do ar acima dessa superfície. É um fator que influencia o clima e o tempo.</p>
+          <p><strong>Medição:</strong> Sensores de pressão, como o BMP180, medem a pressão atmosférica e frequentemente também a altitude, usando uma célula de pressão sensível.</p>
+          <p><strong>Aplicações:</strong> Previsão do tempo, monitoramento climático, e sistemas de navegação baseados em altitude.</p>
+        </div>
+      </div>
+      <div class="biomas-section">
+        <h1>BIOMAS</h1>
+        <p><strong>Biomas Brasileiros:</strong> O Brasil é rico em biomas, que são grandes áreas geográficas com características ecológicas semelhantes. Os principais biomas brasileiros incluem a Amazônia, o Cerrado, a Caatinga, a Mata Atlântica, o Pampa e o Pantanal.</p>
+        <p><strong>Amazônia:</strong> Floresta tropical com alta biodiversidade e rica em vegetação. É vital para o equilíbrio climático global e a preservação das espécies.</p>
+        <p><strong>Cerrado:</strong> Savana tropical com uma vegetação rica e variada, incluindo arbustos e árvores de pequeno porte. Importante para a biodiversidade e os recursos hídricos.</p>
+        <p><strong>Caatinga:</strong> Vegetação xerófila adaptada ao clima seco e árido. Caracteriza-se por arbustos espinhosos e plantas resistentes à seca.</p>
+        <p><strong>Mata Atlântica:</strong> Floresta tropical que se estende ao longo da costa atlântica do Brasil. Rica em biodiversidade e enfrenta ameaças devido ao desmatamento.</p>
+        <p><strong>Pampa:</strong> Campos abertos com vegetação de gramíneas e arbustos. Encontrado no sul do Brasil e importante para a agricultura e pecuária.</p>
+        <p><strong>Pantanal:</strong> Área alagada com vegetação aquática e uma rica fauna. É o maior pantanal do mundo e crucial para a biodiversidade e a regulação do ciclo da água.</p>
+        <img src="biomas_brasil.jpg" alt="Biomas Brasileiros">
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="#">Início</a>
+    <a href="#">Sobre</a>
+    <a href="#">Contato</a>
+  </footer>
+
+  <script>
+    async function fetchData() {
+      try {
+        const response = await fetch('http://192.168.181.24/data'); // Altere para o endereço IP do seu ESP32
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        document.getElementById('soilMoistureValue').textContent = data.soilMoisture !== undefined ? data.soilMoisture : 'N/A';
+        document.getElementById('mq9Value').textContent = data.mq9 !== undefined ? data.mq9 : 'N/A';
+        document.getElementById('ldrValue').textContent = data.ldr !== undefined ? data.ldr : 'N/A';
+        document.getElementById('mq135Value').textContent = data.mq135 !== undefined ? data.mq135 : 'N/A';
+        document.getElementById('humidityValue').textContent = data.humidity !== undefined ? data.humidity : 'N/A';
+        document.getElementById('pressureValue').textContent = data.pressure !== undefined ? data.pressure : 'N/A';
+      } catch (error) {
+        console.error('Erro ao buscar os dados:', error);
+      }
+    }
+
+    window.onload = function() {
+      fetchData();
+      setInterval(fetchData, 10000); // Atualiza a cada 10 segundos
+    };
+  </script>
+</body>
+</html>
